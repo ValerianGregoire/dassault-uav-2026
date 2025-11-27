@@ -3,19 +3,19 @@ Automation Project – README
 
 ---
 
-## 📦 Installation
+## Installation
 
-### ✅ Python Version  
+### Python Version  
 This project was developed and tested using **Python 3.11**.  
 Using another version may lead to unexpected behavior.
 
 ---
 
-### 📚 Required Python Libraries  
+### Required Python Libraries  
 Install all dependencies with:
 
 ```bash
-pip install numpy matplotlib pillow opencv-python ultralytics tensorflow paho-mqtt pyserial
+pip install numpy==1.26.4 matplotlib pillow opencv-python opencv-contrib-python==4.7.0.72 ultralytics tensorflow paho-mqtt pyserial pymavlink
 ```
 
 ## MQTT broker
