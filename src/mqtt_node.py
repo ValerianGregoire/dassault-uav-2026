@@ -19,3 +19,6 @@ class MqttNode:
         print(f"[MQTT] {self.name}: waiting for messages...")
         self.client.loop_forever()
 
+if __name__ == "__main__":
+    node = MqttNode(name="MqttNode", subscribe_topic=["#"])
+    node.start()

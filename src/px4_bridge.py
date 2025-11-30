@@ -1,10 +1,10 @@
 from pymavlink import mavutil
 from mqtt_node import MqttNode
 
-class PX4_bridge(MqttNode):
+class PX4Bridge(MqttNode):
 
     def __init__(self):
-        super().__init__(name="PX4_bridge", subscribe_topic=["att_cmd"])
+        super().__init__(name="px4_bridge", subscribe_topic=["att_cmd"])
         # Connexion MAVLink
         self.master = mavutil.mavlink_connection('COM12',baud=115200)  # Remplacez par l'adresse IP et le port appropriés
         self.data = {}
@@ -38,7 +38,7 @@ class PX4_bridge(MqttNode):
 
 if __name__ == "__main__":
     # Instantiate objects
-    px4_bridge = PX4_bridge()
+    px4_bridge = PX4Bridge()
     
     # Start MQTT node
     px4_bridge.start()
