@@ -7,7 +7,7 @@ import numpy as np
 class Camera(MqttNode):
 
     def __init__(self):
-        super().__init__(name="Camera", subscribe_topic=[])
+        super().__init__(name="camera", subscribe_topic=[])
         
         # Configure the camera
         self.picam2 = Picamera2()

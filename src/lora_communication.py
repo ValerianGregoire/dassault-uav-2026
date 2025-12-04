@@ -14,7 +14,7 @@ class LoraCommunication(MqttNode):
             self.topics = ["GPS_Q", "DETACH"]
         
         # Initialize MQTT node
-        super().__init__(name="PX4_bridge", subscribe_topic=self.topics)
+        super().__init__(name="lora_communication", subscribe_topic=self.topics)
         
         self.commands = {
             "DETACH":0,
@@ -37,6 +37,12 @@ class LoraCommunication(MqttNode):
         if topic in self.commands:
             self.commands[topic] = np.squeeze(json.loads(payload)).tolist()
             print(f"[MQTT] Received command - {topic}: {self.commands[topic]}")
+
+    def publish_commands(self):
+        # Publish command data
+        for command, value in self.commands.items():
+            self.client.publish(command, json.dumps(value))
+            print("[MQTT] Published command - {}: {}".format(command, value))
 
     def send_lora(self):
         # Send all commands via uart
@@ -65,20 +71,17 @@ class LoraCommunication(MqttNode):
             else:
                 self.commands[output_head] = output_body.copy()
 
+
 if __name__ == "__main__":
-    # Instantiate objects
     lora_communication = LoraCommunication()
     
     # Start MQTT node
     lora_communication.start()
     
     # Loop to send and receive data via LoRa
-    try:
-        while True:
-            lora_communication.send_lora()
-            lora_communication.receive_lora()
-    except KeyboardInterrupt:
-        print("Exiting program.")
+    while True:
+        lora_communication.send_lora()
+        lora_communication.receive_lora()
 
 
 

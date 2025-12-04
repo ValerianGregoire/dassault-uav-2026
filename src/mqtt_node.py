@@ -20,5 +20,8 @@ class MqttNode:
         self.client.loop_forever()
 
 if __name__ == "__main__":
+    # This node subscribes to all topics and prints received messages
     node = MqttNode(name="MqttNode", subscribe_topic=["#"])
+    
+    # Start MQTT node
     node.start()
